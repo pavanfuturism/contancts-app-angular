@@ -35,7 +35,7 @@ export class AddEditContactComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clear();
+    
     console.log(this.inpcontact );
     
     if (this.inpcontact != null || this.inpcontact != undefined) {
