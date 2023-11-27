@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterfaceServices } from "./api-interface-service";
-import { contact } from '../models/contact-model';
+import { Contact } from '../models/contact-model';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class contactService {
 
   }
 
-  getcontactsList(): Observable<contact[]> {
+  getcontactsList(): Observable<Contact[]> {
     return this.apiService.get('Contacts/All');
   }
 
@@ -20,11 +21,12 @@ export class contactService {
     return this.apiService.post('Contacts/CreateUpdate', contact);
   }
 
-  getcontactById(id: number): Observable<contact> {
+  getcontactById(id: number): Observable<Contact> {
     return this.apiService.get(`Contacts/Detail/${id}`);
   }
 
   deletecontact(id: number): Observable<Object> {
     return this.apiService.delete(`Contacts/delete/${id}`);
   }
+
 }

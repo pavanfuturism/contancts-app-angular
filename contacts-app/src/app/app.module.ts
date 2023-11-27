@@ -3,26 +3,44 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { ContactComponent } from './pages/contacts/contact-managment.component';
+import { ContactComponent } from './pages/contacts/contact-list.component';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routes';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { SharedModule } from './shared/shared.module';
+import { AddEditContactComponent } from './pages/contacts/addEdit-contact.component';
+import { HttpInteceptorService } from './shared/services/http-interceptor-service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactComponent
+    ContactComponent,
+    AddEditContactComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule,
-    CommonModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    SharedModule,
+    
   ],
-  providers: [],
+
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInteceptorService,
+      multi: true,
+      
+    },
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
