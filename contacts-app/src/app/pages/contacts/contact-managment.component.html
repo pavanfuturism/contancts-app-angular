@@ -1,0 +1,93 @@
+<div class = "container">
+<div class="row">
+  <h2> Contacts App</h2>
+</div>
+
+<form [formGroup]="contactForm" (submit)="isSubmitted = true" (ngSubmit)="onSubmit()">
+<button (click)="createcontact()" class="btn btn-success">New</button>
+
+<br/>
+
+<table class="table" >
+  <thead>
+    <tr>
+      <th> Id </th>
+      <th> First Name</th>
+      <th> Last Name </th>
+      <th> Email Id</th>
+      <th> Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let contact of contacts">
+    
+      <tr *ngIf="contactSelected!=contact" >   
+        <td scope="col">{{contact.iContactId}}</td>
+        <td> {{ contact.strFirstName }} </td>
+        <td> {{ contact.strLastName }} </td>
+        <td> {{ contact.strEmail }} </td>
+        <td>
+          <button (click)="updatecontact(contact)" class="btn btn-primary"> Update</button>
+          <button (click)="deletecontact(contact.iContactId)" class="btn btn-danger" style="margin-left: 10px"> Delete</button>
+        </td>
+      </tr>
+      <tr *ngIf="contactSelected==contact" >
+        <td>{{ contact.iContactId }}</td>
+        <td>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              [value]="contact.strFirstName"
+              title="First Name"
+              required
+              [ngClass]="{ 'is-invalid': isSubmitted }"
+              />
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            [value]="contact.strLastName"
+            title="Last Name"
+            required
+            [ngClass]="{ 'is-invalid': isSubmitted }"
+            />
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="email"
+            [value]="contact.strEmail"
+            title="Email Address"
+            />
+        </td>
+        <td>             
+          <button
+              class="btn btn-primary btn-sm mx-1"
+              title="Save"
+              type="submit"
+              (click)="savecontact()"
+            
+            >
+              <i class="bi bi-lightning"></i>
+            </button>
+  
+            <button
+              class="btn btn-danger btn-sm mx-1"
+              title="Cancel"
+              type="button"
+              (click)="cancel()"
+            >
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </td>
+      </tr>
+    </ng-container>
+    
+  </tbody>
+</table>
+</form>
+</div>  

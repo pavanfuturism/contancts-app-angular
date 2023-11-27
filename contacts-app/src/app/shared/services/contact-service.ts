@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiInterfaceServices } from "./api-interface-service";
+import { contact } from '../models/contact-model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class contactService {
+
+  constructor(private apiService: ApiInterfaceServices) {
+
+  }
+
+  getcontactsList(): Observable<contact[]> {
+    return this.apiService.get('Contacts/All');
+  }
+
+  createupdatecontact(contact: any): Observable<Object> {
+    return this.apiService.post('Contacts/CreateUpdate', contact);
+  }
+
+  getcontactById(id: number): Observable<contact> {
+    return this.apiService.get(`Contacts/Detail/${id}`);
+  }
+
+  deletecontact(id: number): Observable<Object> {
+    return this.apiService.delete(`Contacts/delete/${id}`);
+  }
+}
