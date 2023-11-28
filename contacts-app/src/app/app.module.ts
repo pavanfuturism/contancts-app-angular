@@ -14,6 +14,11 @@ import { SharedModule } from './shared/shared.module';
 import { AddEditContactComponent } from './pages/contacts/addEdit-contact.component';
 import { HttpInteceptorService } from './shared/services/http-interceptor-service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactEffects } from '../app/shared/task.effects';
+import { taskReducer } from '../app/shared/task.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -29,7 +34,9 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot(taskReducer),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
 
   providers: [

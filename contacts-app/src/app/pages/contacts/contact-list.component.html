@@ -4,11 +4,11 @@
   <button (click)="createcontact()" class="btn btn-success">New</button>
   <br />
   <br />
-  <div class="table-outer" *ngIf="contacts.length<=0">
+  <div class="table-outer" *ngIf="!contacts">
     <h2 class="text-center">  No Record(s) Found. </h2>
   </div>
 
-  <div class="table-outer" *ngIf="contacts.length>0">
+  <div class="table-outer" *ngIf="contacts">
     <p-table #dt1 [value]="contacts" dataKey="id"
              styleClass="p-datatable-customers p-datatable-gridlines"
              [totalRecords]="totalRecords" [paginator]="true"

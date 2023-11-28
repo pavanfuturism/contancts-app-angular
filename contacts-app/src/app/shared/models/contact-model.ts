@@ -1,7 +1,10 @@
-export class  Contact {
-    iContactId: number = 0;
-    strFirstName: string ='';
-    strLastName: string ='' ;
-    strEmail: string ='';
-    //isEditable: boolean = false;
+export interface Contact {
+  iContactId: number;
+  strFirstName: string;
+  strLastName: string;
+  strEmail: string;
+}
+
+export interface IContactState {
+  contacts: Contact[];
 }
