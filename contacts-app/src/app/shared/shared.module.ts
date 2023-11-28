@@ -7,10 +7,14 @@ import { ToastrModule } from "ngx-toastr";
 import { TableModule } from "primeng/table";
 import { LoaderInterceptorService } from "./services/loader-interceptor.service";
 import { DialogModule } from 'primeng/dialog';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { taskReducer } from './task.reducer';
+import { ContactEffects } from './task.effects';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule,ReactiveFormsModule,FormsModule,TableModule,ToastrModule.forRoot(),DialogModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule, TableModule, ToastrModule.forRoot(), DialogModule, StoreModule.forFeature('tasks', taskReducer), EffectsModule.forFeature([ContactEffects])],
   exports:[CommonModule, RouterModule,ReactiveFormsModule,FormsModule,TableModule,ToastrModule,DialogModule],
   providers:[{
     provide: HTTP_INTERCEPTORS,

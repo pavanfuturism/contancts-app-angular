@@ -17,12 +17,12 @@ export class AddEditContactComponent implements OnInit {
 
   contactForm: FormGroup;
   isSubmitted: boolean = false;
-  @Input() inpcontact:any;
+  @Input() inpcontact: any;
   @Output() status = new EventEmitter();
   @Output() cancelAddPage = new EventEmitter();
-  contact :any;
-  displayLabel: string='Add Contact';
-  btnText:string="Add"
+  contact: any;
+  displayLabel: string = 'Add Contact';
+  btnText: string = "Add"
 
   constructor(private fb: FormBuilder, private contactService: contactService,
     private router: Router, private common: CommonService) {
@@ -31,17 +31,16 @@ export class AddEditContactComponent implements OnInit {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, emailValidator]],
     });
-    this.displayLabel= 'Add Contact';
+    this.displayLabel = 'Add Contact';
   }
 
   ngOnInit() {
-    
-    console.log(this.inpcontact );
-    
+
+    console.log(this.inpcontact);
+
     if (this.inpcontact != null || this.inpcontact != undefined) {
-      console.log('hii');
-      
-      this.displayLabel= 'Edit Contact';
+
+      this.displayLabel = 'Edit Contact';
       this.btnText = "Edit";
       this.contact = this.inpcontact;
       this.contactForm.patchValue({
@@ -53,8 +52,8 @@ export class AddEditContactComponent implements OnInit {
   }
 
   clear() {
-    this.contact = new Contact();
-    this.displayLabel= 'Add Contact';
+    this.contact = null;
+    this.displayLabel = 'Add Contact';
     this.status.emit(false);
   }
 
